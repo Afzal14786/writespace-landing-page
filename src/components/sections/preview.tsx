@@ -1,6 +1,3 @@
-import Image from "next/image";
-import type { ReactNode } from "react";
-
 import {
   Badge,
   BrowserFrame,
@@ -8,42 +5,14 @@ import {
   Container,
   Heading,
   PhoneFrame,
+  ResponsiveImage,
   Reveal,
   Section,
 } from "@/components/ui";
 
-/*
- * Replace these placeholder paths with the real screenshot paths
- * once the Writespace frontend screenshots are available.
- */
-const PREVIEW_IMAGES = {
-  feedDesktop: "/images/previews/feed-desktop-placeholder.svg",
-  articleDesktop: "/images/previews/article-desktop-placeholder.svg",
-  composerDesktop: "/images/previews/composer-desktop-placeholder.svg",
-  feedPhone: "/images/previews/feed-phone-placeholder.svg",
-} as const;
+import type { ReactNode } from "react";
 
-type PreviewImageProps = {
-  src: string;
-  alt: string;
-  aspectRatio: "desktop" | "phone";
-  sizes: string;
-};
-
-function PreviewImage({ src, alt, aspectRatio, sizes }: PreviewImageProps) {
-  const aspectClasses = {
-    desktop: "aspect-[16/10]",
-    phone: "aspect-[9/19]",
-  };
-
-  return (
-    <div
-      className={`relative w-full overflow-hidden bg-lavender ${aspectClasses[aspectRatio]}`}
-    >
-      <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
-    </div>
-  );
-}
+import { assets } from "@/lib/assets";
 
 type PreviewCardProps = {
   title: string;
@@ -83,7 +52,7 @@ export function Preview() {
           </div>
         </Reveal>
 
-        {/* Screenshot collection */}
+        {/* Responsive product preview collection */}
         <div
           aria-label="Writespace product design previews"
           className="-mx-page-gutter mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-page-gutter pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0 lg:snap-none"
@@ -93,19 +62,18 @@ export function Preview() {
             <PreviewCard title="Feed">
               <div className="relative">
                 <BrowserFrame aria-label="Desktop feed browser preview">
-                  <PreviewImage
-                    src={PREVIEW_IMAGES.feedDesktop}
-                    alt="Writespace desktop feed design preview showing the layout for browsing developer posts."
-                    aspectRatio="desktop"
-                    sizes="(min-width: 1024px) 28vw, 88vw"
+                  <ResponsiveImage
+                    asset={assets.previews.feedDesktop}
+                    aspectRatio="preview"
+                    sizes="(min-width: 1024px) 28vw, 84vw"
                   />
                 </BrowserFrame>
 
+                {/* Mobile feed screenshot layered over desktop preview */}
                 <div className="absolute right-2 top-1/2 z-10 w-[26%] max-w-24 -translate-y-1/2">
                   <PhoneFrame aria-label="Mobile feed design preview">
-                    <PreviewImage
-                      src={PREVIEW_IMAGES.feedPhone}
-                      alt="Writespace mobile feed design preview showing the feed layout on a phone screen."
+                    <ResponsiveImage
+                      asset={assets.previews.feedPhone}
                       aspectRatio="phone"
                       sizes="(min-width: 1024px) 90px, 25vw"
                     />
@@ -119,11 +87,10 @@ export function Preview() {
           <Reveal className="w-[84%] max-w-[34rem] shrink-0 snap-start lg:w-auto lg:max-w-none">
             <PreviewCard title="Article page">
               <BrowserFrame aria-label="Article page browser preview">
-                <PreviewImage
-                  src={PREVIEW_IMAGES.articleDesktop}
-                  alt="Writespace article page design preview showing the reading layout for a long-form technical article."
-                  aspectRatio="desktop"
-                  sizes="(min-width: 1024px) 28vw, 88vw"
+                <ResponsiveImage
+                  asset={assets.previews.articleDesktop}
+                  aspectRatio="preview"
+                  sizes="(min-width: 1024px) 28vw, 84vw"
                 />
               </BrowserFrame>
             </PreviewCard>
@@ -133,11 +100,10 @@ export function Preview() {
           <Reveal className="w-[84%] max-w-[34rem] shrink-0 snap-start lg:w-auto lg:max-w-none">
             <PreviewCard title="Writing screen">
               <BrowserFrame aria-label="Writing screen browser preview">
-                <PreviewImage
-                  src={PREVIEW_IMAGES.composerDesktop}
-                  alt="Writespace writing screen design preview showing the composition area for creating an article."
-                  aspectRatio="desktop"
-                  sizes="(min-width: 1024px) 28vw, 88vw"
+                <ResponsiveImage
+                  asset={assets.previews.composerDesktop}
+                  aspectRatio="preview"
+                  sizes="(min-width: 1024px) 28vw, 84vw"
                 />
               </BrowserFrame>
             </PreviewCard>
