@@ -49,7 +49,10 @@ function getButtonClassName(
   className?: string,
 ): string {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-pill font-copy font-semibold leading-none transition-colors duration-200 focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-violet disabled:cursor-not-allowed disabled:opacity-60",
+    "inline-flex items-center justify-center gap-2 rounded-pill font-copy font-semibold leading-none",
+    "motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out motion-safe:hover:-translate-y-0.5",
+    "focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-violet",
+    "disabled:cursor-not-allowed disabled:opacity-60",
     variantClasses[variant],
     sizeClasses[size],
     className,
