@@ -1,4 +1,11 @@
-import { Badge, Button, Container, Reveal, Section } from "@/components/ui";
+import {
+  Badge,
+  Button,
+  Container,
+  HeroVideo,
+  Reveal,
+  Section,
+} from "@/components/ui";
 
 import { HeroHeadline } from "@/components/sections/hero-headline";
 
@@ -45,8 +52,13 @@ export function Hero() {
             </p>
           </div>
 
-          {/* Right: Static product previews with entrance reveals */}
+          {/* Right: Hero video and product previews */}
           <div className="relative mx-auto w-full max-w-xl pb-2 lg:mx-0 lg:pb-10">
+            {/* Real hero video */}
+            <Reveal className="mb-5">
+              <HeroVideo />
+            </Reveal>
+
             {/* Post preview */}
             <div className="relative z-20 lg:-rotate-2">
               <Reveal>
