@@ -17,3 +17,6 @@ export { Section } from "./section";
 export type { SectionBackground } from "./section";
 
 export { Squiggle } from "./squiggle";
+
+export { BrowserFrame } from "./browser-frame";
+export { PhoneFrame } from "./phone-frame";
