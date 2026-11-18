@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" xmlns:c2pa="http://c2pa.org/manifest">
+  <title>Writespace – circular logo (enhanced)</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3f38ad"/><stop offset="0.5" stop-color="#2a2574"/><stop offset="1" stop-color="#15133a"/>
+    </linearGradient>
+    <radialGradient id="bgglow" cx="0.34" cy="0.26" r="0.62">
+      <stop offset="0" stop-color="#7468ff" stop-opacity="0.30"/><stop offset="1" stop-color="#7468ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.72" stop-color="#0c0b26" stop-opacity="0"/><stop offset="1" stop-color="#0c0b26" stop-opacity="0.38"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.50"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.08"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.16"/>
+    </linearGradient>
+    <clipPath id="clip"><circle cx="512" cy="512" r="508"/></clipPath>
+  </defs>
+  <circle cx="512" cy="512" r="508" fill="url(#bg)"/>
+  <g clip-path="url(#clip)">
+    <rect width="1024" height="1024" fill="url(#bgglow)"/>
+    <rect width="1024" height="1024" fill="url(#vig)"/>
+    <g transform="translate(512 512) scale(1.08) translate(-487 -505)">
+  <defs>
+    <linearGradient id="nibm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffcf6"/><stop offset="0.55" stop-color="#f4ecdc"/><stop offset="1" stop-color="#e6d9bf"/>
+    </linearGradient>
+    <linearGradient id="nibsidem" x1="292" y1="0" x2="665" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.22" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.62" stop-color="#b79f78" stop-opacity="0"/>
+      <stop offset="1" stop-color="#a98d63" stop-opacity="0.38"/>
+    </linearGradient>
+    <clipPath id="nibclipm"><path d="M405 227 H553 C630 300 665 370 665 440 C665 545 610 620 565 690 C535 735 505 775 488 805 L488 500 L472 500 L472 805 C462 775 435 740 405 700 C345 620 292 545 292 440 C292 370 330 300 405 227 Z"/></clipPath>
+    <linearGradient id="orbFm" x1="135.7" y1="497.2" x2="820.9000000000001" y2="497.2" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff6a78"/><stop offset="0.5" stop-color="#ff7a59"/><stop offset="1" stop-color="#ffa561"/>
+    </linearGradient>
+    <linearGradient id="orbBm" x1="135.7" y1="497.2" x2="820.9000000000001" y2="497.2" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff6a78" stop-opacity="0.22"/><stop offset="0.6" stop-color="#ff7a59" stop-opacity="0.5"/><stop offset="1" stop-color="#ffa561" stop-opacity="0.8"/>
+    </linearGradient>
+    <radialGradient id="dotm" cx="0.36" cy="0.30" r="0.8">
+      <stop offset="0" stop-color="#ffb08c"/><stop offset="0.55" stop-color="#ff7a59"/><stop offset="1" stop-color="#f2593a"/>
+    </radialGradient>
+    <radialGradient id="halom" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff8a5c" stop-opacity="0.55"/><stop offset="0.45" stop-color="#ff7a59" stop-opacity="0.18"/><stop offset="1" stop-color="#ff7a59" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nibglowm" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8f7dff" stop-opacity="0.34"/><stop offset="1" stop-color="#8f7dff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- soft light behind the nib -->
+  <circle cx="480" cy="470" r="400" fill="url(#nibglowm)"/>
+
+  <!-- stars -->
+  <g>
+    <path d="M221.3 214.5 Q222.5 221.2 229.2 222.4 Q222.5 223.7 221.3 230.4 Q220.0 223.7 213.4 222.4 Q220.0 221.2 221.3 214.5Z" fill="#fff4e0" fill-opacity="0.85"/>
+    <circle cx="90.8" cy="406.7" r="2.2" fill="#fff4e0" fill-opacity="0.45"/>
+    <circle cx="247.1" cy="341.0" r="4.2" fill="#fff4e0" fill-opacity="0.6"/>
+    <circle cx="916.1" cy="498.7" r="2.2" fill="#fff4e0" fill-opacity="0.75"/>
+    <circle cx="832.5" cy="668.2" r="4.2" fill="#fff4e0" fill-opacity="0.3"/>
+    <circle cx="602.0" cy="847.9" r="3.4" fill="#fff4e0" fill-opacity="0.45"/>
+    <circle cx="719.0" cy="646.5" r="4.2" fill="#fff4e0" fill-opacity="0.6"/>
+    <circle cx="434.4" cy="926.1" r="5.0" fill="#fff4e0" fill-opacity="0.75"/>
+    <circle cx="351.2" cy="888.8" r="2.8" fill="#fff4e0" fill-opacity="0.3"/>
+    <path d="M651.7 883.3 Q654.6 898.4 669.7 901.3 Q654.6 904.2 651.7 919.3 Q648.8 904.2 633.7 901.3 Q648.8 898.4 651.7 883.3Z" fill="#fff4e0" fill-opacity="0.85"/>
+    <circle cx="720.4" cy="844.4" r="5.0" fill="#fff4e0" fill-opacity="0.6"/>
+    <circle cx="459.2" cy="87.6" r="2.8" fill="#fff4e0" fill-opacity="0.75"/>
+    <circle cx="706.7" cy="728.6" r="5.0" fill="#fff4e0" fill-opacity="0.3"/>
+    <circle cx="222.5" cy="816.1" r="3.4" fill="#fff4e0" fill-opacity="0.45"/>
+    <circle cx="375.7" cy="133.4" r="3.4" fill="#fff4e0" fill-opacity="0.6"/>
+    <circle cx="455.1" cy="167.1" r="4.2" fill="#fff4e0" fill-opacity="0.75"/>
+    <circle cx="779.2" cy="755.8" r="4.2" fill="#fff4e0" fill-opacity="0.3"/>
+    <circle cx="629.3" cy="117.2" r="2.8" fill="#fff4e0" fill-opacity="0.45"/>
+    <path d="M713.5 128.5 Q716.0 141.2 728.7 143.6 Q716.0 146.0 713.5 158.7 Q711.1 146.0 698.4 143.6 Q711.1 141.2 713.5 128.5Z" fill="#fff4e0" fill-opacity="0.85"/>
+    <circle cx="426.2" cy="845.4" r="3.4" fill="#fff4e0" fill-opacity="0.75"/>
+    <circle cx="877.9" cy="566.2" r="2.8" fill="#fff4e0" fill-opacity="0.3"/>
+    <circle cx="558.0" cy="122.8" r="2.2" fill="#fff4e0" fill-opacity="0.45"/>
+    <circle cx="118.4" cy="334.9" r="3.4" fill="#fff4e0" fill-opacity="0.6"/>
+    <circle cx="523.1" cy="191.5" r="2.2" fill="#fff4e0" fill-opacity="0.75"/>
+    <circle cx="645.2" cy="195.3" r="5.0" fill="#fff4e0" fill-opacity="0.3"/>
+    <circle cx="572.4" cy="926.1" r="2.2" fill="#fff4e0" fill-opacity="0.45"/>
+    <circle cx="60.5" cy="493.5" r="3.4" fill="#fff4e0" fill-opacity="0.6"/>
+    <path d="M280.4 122.7 Q282.8 135.4 295.5 137.9 Q282.8 140.3 280.4 153.0 Q278.0 140.3 265.3 137.9 Q278.0 135.4 280.4 122.7Z" fill="#fff4e0" fill-opacity="0.85"/>
+    <circle cx="513.3" cy="839.2" r="4.2" fill="#fff4e0" fill-opacity="0.3"/>
+    <circle cx="788.1" cy="575.2" r="2.2" fill="#fff4e0" fill-opacity="0.45"/>
+  </g>
+
+  <g transform="rotate(-23.93 478.3 497.2)">
+    <!-- orbit glow (stacked strokes, no filters, so it renders everywhere) -->
+    <path d="M135.7 497.2 A342.6 120.6 0 0 0 820.9000000000001 497.2" fill="none" stroke="#ff7a59" stroke-opacity="0.05" stroke-width="46" stroke-linecap="round"/>
+    <path d="M135.7 497.2 A342.6 120.6 0 0 0 820.9000000000001 497.2" fill="none" stroke="#ff7a59" stroke-opacity="0.07" stroke-width="34" stroke-linecap="round"/>
+    <path d="M135.7 497.2 A342.6 120.6 0 0 0 820.9000000000001 497.2" fill="none" stroke="#ff7a59" stroke-opacity="0.10" stroke-width="24" stroke-linecap="round"/>
+    <!-- orbit back half -->
+    <path d="M135.7 497.2 A342.6 120.6 0 0 1 820.9000000000001 497.2" fill="none" stroke="url(#orbBm)" stroke-width="14" stroke-linecap="round"/>
+  </g>
+
+  <!-- pen nib -->
+  <path d="M405 227 H553 C630 300 665 370 665 440 C665 545 610 620 565 690 C535 735 505 775 488 805 L488 500 L472 500 L472 805 C462 775 435 740 405 700 C345 620 292 545 292 440 C292 370 330 300 405 227 Z" fill="url(#nibm)"/>
+  <g clip-path="url(#nibclipm)">
+    <rect x="280" y="215" width="400" height="600" fill="url(#nibsidem)"/>
+    <!-- cast shadows from the dot and the orbit -->
+    <circle cx="482" cy="470" r="48" fill="#7a5530" fill-opacity="0.12"/>
+    <g transform="translate(3 9) rotate(-23.93 478.3 497.2)">
+      <path d="M135.7 497.2 A342.6 120.6 0 0 0 820.9000000000001 497.2" fill="none" stroke="#6a4a3a" stroke-opacity="0.13" stroke-width="20"/>
+    </g>
+  </g>
+
+  <!-- slit: solid navy groove -->
+  <rect x="472" y="500" width="16" height="306" fill="#1e1b52"/>
+  <rect x="472" y="500" width="5" height="306" fill="#14123a" fill-opacity="0.55"/>
+
+  <!-- centre dot -->
+  <circle cx="478.4" cy="459.8" r="46.5" fill="url(#dotm)"/>
+  <circle cx="463" cy="444" r="13" fill="#ffffff" fill-opacity="0.28"/>
+
+  <!-- orbit front half -->
+  <g transform="rotate(-23.93 478.3 497.2)">
+    <path d="M135.7 497.2 A342.6 120.6 0 0 0 820.9000000000001 497.2" fill="none" stroke="url(#orbFm)" stroke-width="14" stroke-linecap="round"/>
+  </g>
+
+  <!-- orbiting dot with halo -->
+  <circle cx="792" cy="360" r="92" fill="url(#halom)"/>
+  <circle cx="792" cy="360" r="32" fill="url(#dotm)"/>
+  <circle cx="782" cy="350" r="8.5" fill="#ffffff" fill-opacity="0.30"/>
+</g>
+  </g>
+  <circle cx="512" cy="512" r="505.5" fill="none" stroke="url(#rim)" stroke-width="4"/>
+  <circle cx="512" cy="512" r="486" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1.5"/>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpkNGQ1NTIxOS0wZGMxLTQ2NGEtYjFmNi0yNThlY2U3OWY2YTkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaOiPOoPeERy6dJgfcsSFQKEAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDowMzEzOTJkNS04MDU3LTQ5MTEtOGE2MC1lZTQ4MGE4Y2MyZDVscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoH4t8IxkjbtdG6cV9y4TwkAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFgg/0CHcVXoINX9Qibl8BZVesLvcKKf/cbT4drRmFFhM9ekZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaLVtl4VMa4NrtOxuj9XdKdYAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIJELqEgB8ZpBJzXxTcR1/PLEdLUZNbuZPHEbQ+6PcQH6ZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GSLDZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmQ0ZDU1MjE5LTBkYzEtNDY0YS1iMWY2LTI1OGVjZTc5ZjZhOS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmJiYzkzMTY0LTEzZmMtNGJiMi04NTliLWRhY2IyNThiZmY2N3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCD/QIdxVegg1f1CJuXwFlV6wu9wop/9xtPh2tGYUWEz16JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg6e1srz95CRi/YUF+tYi9I3IYBiW6WT+rBUl4rLn1nByiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggf0ybho8Lw3gxFlD5xYmeCe+rcAp7pGE14r9R0cwDagN0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQEFBQGhcN019I3DYAboMiOz+CLu72D37++R8e6olUzx0t0ErafpmwXgS+A6agU69T7X0wEj9T+7c29SnmAssdkU=</c2pa:manifest></metadata></svg>
