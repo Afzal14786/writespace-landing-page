@@ -23,21 +23,16 @@ export function WaitlistForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    // Prevent accidental duplicate submissions.
     if (status === "loading" || status === "success") {
       return;
     }
 
     const formData = new FormData(event.currentTarget);
-
     const websiteValue = formData.get("website");
 
     const website = typeof websiteValue === "string" ? websiteValue : "";
 
-    /*
-     * Validate in the browser before making the request.
-     * The server still performs the same validation independently.
-     */
+    // Validate locally before making the API request.
     const result = waitlistSubmissionSchema.safeParse({
       email,
       website,
@@ -92,7 +87,6 @@ export function WaitlistForm() {
       aria-busy={status === "loading"}
       className="relative mt-8 w-full"
     >
-      {/* Visible email label */}
       <label
         htmlFor={emailId}
         className="mb-2 block text-left font-copy text-sm font-semibold text-surface"
@@ -134,13 +128,7 @@ export function WaitlistForm() {
         </Button>
       </div>
 
-      {/*
-       * Honeypot field.
-       *
-       * This is visually outside the viewport, excluded from the
-       * accessibility tree, and removed from keyboard navigation.
-       * Automated bots that fill all form inputs may still populate it.
-       */}
+      {/* Honeypot: visually hidden and excluded from keyboard navigation. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-[-10000px] top-auto h-px w-px overflow-hidden"
@@ -156,7 +144,7 @@ export function WaitlistForm() {
         />
       </div>
 
-      {/* Screen-reader announcement and visible feedback */}
+      {/* Announces loading, success, and error states. */}
       <p
         id={feedbackId}
         role="status"
