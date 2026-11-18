@@ -10,7 +10,7 @@ const footerLinks = [
   },
   {
     label: "Contact",
-    href: "mailto:mdafzal14777@gmail.com",
+    href: "mailto:contactwritespace@gmail.com",
     external: false,
   },
   {
