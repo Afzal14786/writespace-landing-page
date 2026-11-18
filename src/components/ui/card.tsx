@@ -9,6 +9,7 @@ export function Card({ className, ...props }: CardProps) {
     <div
       className={cn(
         "rounded-card border border-line bg-surface shadow-card",
+        "motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out motion-safe:hover:-translate-y-0.5",
         className,
       )}
       {...props}
