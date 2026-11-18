@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+
+  --paper: #fff8f2;
+  --surface: #ffffff;
+  --lavender: #f1eeff;
+  --peach: #ffece5;
+  --ink: #181438;
+  --body: #4b4766;
+  --muted: #6b6785;
+  --line: #e4dcef;
+  --coral: #fc745c;
+  --coral-text: #e85a41;
+  --violet: #8878f0;
+}
+
+/*
+ * Semantic theme tokens keep component styles tied to the Writespace brand.
+ * The font custom properties are supplied by next/font on the root element.
+ */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-lavender: var(--lavender);
+  --color-peach: var(--peach);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-coral: var(--coral);
+  --color-coral-text: var(--coral-text);
+  --color-violet: var(--violet);
+
+  --font-headline: var(--font-display);
+  --font-copy: var(--font-body);
+  --font-code: var(--font-mono);
+
+  --radius-card: 16px;
+  --radius-panel: 24px;
+  --radius-pill: 9999px;
+
+  --shadow-soft: 0 12px 32px rgb(24 20 56 / 8%);
+  --shadow-card: 0 4px 18px rgb(24 20 56 / 6%);
+
+  /* Content widths */
+  --container-content: 72rem;
+  --container-copy: 44rem;
+
+  /* Responsive spacing */
+  --spacing-page-gutter: clamp(1rem, 4vw, 3.5rem);
+  --spacing-section-mobile: 4rem;
+  --spacing-section-desktop: 6rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--body);
+  font-family: var(--font-body), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--lavender);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
