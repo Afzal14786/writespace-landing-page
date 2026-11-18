@@ -22,3 +22,8 @@ export { BrowserFrame } from "./browser-frame";
 export { PhoneFrame } from "./phone-frame";
 
 export { Reveal } from "./reveal";
+
+export { ResponsiveImage } from "./responsive-image";
+export type { ImageAspectRatio, ImageFit } from "./responsive-image";
+
+export { HeroVideo } from "./hero-video";
