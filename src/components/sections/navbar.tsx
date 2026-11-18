@@ -17,7 +17,6 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    // Update the navbar border only when the page's scroll state changes.
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
@@ -42,7 +41,6 @@ export function Navbar() {
     >
       <Container>
         <div className="flex min-h-16 items-center justify-between gap-3 py-3 md:min-h-20 md:gap-6">
-          {/* Brand */}
           <Link
             href="#top"
             aria-label="Writespace home"
@@ -60,10 +58,9 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop navigation */}
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-5 lg:gap-7 md:flex"
+            className="hidden items-center gap-5 md:flex lg:gap-7"
           >
             {navigationLinks.map((link) => (
               <Link
@@ -76,7 +73,6 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Waitlist CTA */}
           <Button
             href="#waitlist"
             size="md"
