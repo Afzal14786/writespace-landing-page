@@ -1,11 +1,13 @@
-import Image from "next/image";
+import {
+  Card,
+  Container,
+  Heading,
+  ResponsiveImage,
+  Reveal,
+  Section,
+} from "@/components/ui";
 
-import { Card, Container, Heading, Reveal, Section } from "@/components/ui";
-
-/*
- * Replace this path when the real founder portrait is available.
- */
-const FOUNDER_IMAGE = "/images/founder/founder-portrait-placeholder.svg";
+import { assets } from "@/lib/assets";
 
 export function FounderNote() {
   return (
@@ -14,23 +16,19 @@ export function FounderNote() {
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14">
           {/* Founder portrait */}
           <Reveal className="mx-auto w-full max-w-md lg:mx-0">
-            <div className="aspect-[4/5] overflow-hidden rounded-panel border border-line bg-lavender shadow-card">
-              <Image
-                src={FOUNDER_IMAGE}
-                alt="Placeholder illustration for the Writespace founder portrait."
-                width={720}
-                height={900}
-                sizes="(min-width: 1024px) 36vw, 90vw"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <ResponsiveImage
+              asset={assets.founder.portrait}
+              aspectRatio="portrait"
+              sizes="(min-width: 1024px) 36vw, 90vw"
+              className="rounded-panel border border-line shadow-card"
+            />
           </Reveal>
 
           {/* Founder note */}
           <Reveal>
             <Card className="h-full p-6 sm:p-8 lg:p-10">
               <p className="font-code text-xs font-medium uppercase tracking-wider text-muted">
-                A note from a fellow developer
+                A note from the fellow developer
               </p>
 
               <Heading level={2} className="mt-4">
