@@ -20,3 +20,5 @@ export { Squiggle } from "./squiggle";
 
 export { BrowserFrame } from "./browser-frame";
 export { PhoneFrame } from "./phone-frame";
+
+export { Reveal } from "./reveal";
