@@ -46,23 +46,25 @@ export function Footer() {
 
   // Empty contact placeholders are intentionally omitted instead of
   // rendering invented or non-functional social links.
-  const socialLinks: SocialLink[] = [
-    {
-      label: "LinkedIn",
-      href: contact.linkedin,
-      mark: "linkedin",
-    },
-    {
-      label: "GitHub",
-      href: contact.github,
-      mark: "github",
-    },
-    {
-      label: "X",
-      href: contact.x,
-      mark: "x",
-    },
-  ].filter((link) => link.href.trim().length > 0);
+  const socialLinks = (
+    [
+      {
+        label: "LinkedIn",
+        href: contact.linkedin,
+        mark: "linkedin",
+      },
+      {
+        label: "GitHub",
+        href: contact.github,
+        mark: "github",
+      },
+      {
+        label: "X",
+        href: contact.x,
+        mark: "x",
+      },
+    ] satisfies SocialLink[]
+  ).filter((link) => link.href.trim().length > 0);
 
   const helloHref = contact.email
     ? `mailto:${contact.email}?subject=${encodeURIComponent(contact.sayHelloSubject)}`
