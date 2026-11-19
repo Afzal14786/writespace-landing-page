@@ -12,7 +12,7 @@ export function NotificationPill() {
       </span>
 
       <p className="font-copy text-xs font-semibold text-ink sm:text-sm">
-        Maya replied to your post
+        Meenal replied to your post
       </p>
     </div>
   );

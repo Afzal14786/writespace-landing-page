@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 
-import { waitlistSubmissionSchema } from "@/lib/waitlist-schema";
 import { saveWaitlistEmail } from "@/lib/waitlist";
+import { waitlistSubmissionSchema } from "@/lib/waitlist-schema";
 
-/** Safely narrow an untrusted JSON value to an object. */
+/** Safely narrow untrusted JSON to an object before reading its fields. */
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -19,11 +19,9 @@ export async function POST(request: Request) {
   }
 
   /*
-   * Honeypot check must happen before email validation.
-   *
-   * Bots that fill the hidden website field receive the same
-   * successful response as a normal submission, but their email
-   * is never passed to the storage adapter.
+   * Check the honeypot before validating the email.
+   * Bots receive the same response as a successful signup, but their
+   * submitted email and topic never reach the waitlist adapter.
    */
   if (
     isRecord(body) &&
@@ -33,7 +31,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true }, { status: 200 });
   }
 
-  // Validate the remaining submission on the server.
   const result = waitlistSubmissionSchema.safeParse(body);
 
   if (!result.success) {
@@ -41,7 +38,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await saveWaitlistEmail(result.data.email);
+    await saveWaitlistEmail(result.data.email, result.data.topic);
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {

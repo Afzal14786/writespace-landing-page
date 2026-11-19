@@ -1,118 +1,127 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { Plus } from "lucide-react";
+import Link from "next/link";
 
-import { Card, Container, Heading, Reveal, Section } from "@/components/ui";
+import { Container, Heading, Section } from "@/components/ui";
 
-type FAQItem = {
-  id: string;
-  question: string;
-  answer: string;
-};
-
-const faqItems: FAQItem[] = [
-  {
-    id: "opening",
-    question: "When does it open?",
-    answer:
-      "Writespace is opening soon. Join the waitlist to hear when the doors open.",
-  },
-  {
-    id: "pricing",
-    question: "Is it free?",
-    answer:
-      "Yes, this is completely free. You can write, posts & articles, save other posts or articles and interacts with propes",
-  },
-  {
-    id: "mobile-app",
-    question: "Will there be a mobile app?",
-    answer: "Yes. Mobile apps are planned after the web app.",
-  },
-  {
-    id: "open-source",
-    question: "Is it open source?",
-    answer: "No, the source code is not available publically, but yes documentation is available. ",
-  },
-  {
-    id: "audience",
-    question: "Who is it for?",
-    answer: "Writespace is for developers and technical communities and for those students who loves to build in public.",
-  },
-];
+import { site } from "@/content/site";
 
 export function FAQ() {
-  const [openItem, setOpenItem] = useState<string | null>(null);
+  // Start with the first answer expanded, as specified in the design guide.
+  const [openId, setOpenId] = useState<string | null>(
+    site.faq.questions[0]?.id ?? null,
+  );
 
-  function toggleItem(id: string) {
-    setOpenItem((current) => (current === id ? null : id));
+  const prefersReducedMotion = useReducedMotion();
+
+  const transition = {
+    duration: prefersReducedMotion ? 0 : 0.25,
+    ease: "easeInOut" as const,
+  };
+
+  function toggleQuestion(questionId: string) {
+    setOpenId((currentId) => (currentId === questionId ? null : questionId));
   }
 
   return (
     <Section id="faq" background="paper">
       <Container>
-        <div className="mx-auto max-w-copy">
-          {/* Section introduction */}
-          <Reveal>
-            <div>
-              <Heading level={2}>Frequently asked questions</Heading>
+        <div className="mx-auto max-w-[760px]">
+          {/* Centered section introduction */}
+          <div className="text-center">
+            <Heading level={2}>{site.faq.heading}</Heading>
 
-              <p className="mt-4 font-copy text-base leading-7 text-body">
-                A few things you might be wondering about.
-              </p>
-            </div>
-          </Reveal>
+            <p className="mt-4 font-copy text-base leading-7 text-body sm:text-[17px]">
+              {site.faq.description}
+            </p>
+          </div>
 
-          {/* Accessible accordion */}
-          <Reveal className="mt-8">
-            <Card className="divide-y divide-line px-5 sm:px-7">
-              {faqItems.map((item) => {
-                const isOpen = openItem === item.id;
+          {/* Accessible single-open accordion */}
+          <div className="mt-10 border-t border-line">
+            {site.faq.questions.map((question) => {
+              const isOpen = openId === question.id;
 
-                const triggerId = `faq-trigger-${item.id}`;
-                const answerId = `faq-answer-${item.id}`;
+              const triggerId = `faq-trigger-${question.id}`;
+              const panelId = `faq-panel-${question.id}`;
 
-                return (
-                  <div key={item.id} className="py-1">
-                    <h3>
-                      <button
-                        id={triggerId}
-                        type="button"
-                        aria-expanded={isOpen}
-                        aria-controls={answerId}
-                        onClick={() => toggleItem(item.id)}
-                        className="flex min-h-16 w-full items-center justify-between gap-4 rounded-card py-4 text-left focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-violet"
-                      >
-                        <span className="font-copy text-sm font-semibold leading-6 text-ink sm:text-base">
-                          {item.question}
-                        </span>
-
-                        <ChevronDown
-                          size={19}
-                          aria-hidden="true"
-                          className={`shrink-0 text-muted ${
-                            isOpen ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-                    </h3>
-
-                    <div
-                      id={answerId}
-                      role="region"
-                      aria-labelledby={triggerId}
-                      hidden={!isOpen}
-                      className="pb-5 pr-8"
+              return (
+                <div key={question.id} className="border-b border-line">
+                  <h3>
+                    <button
+                      id={triggerId}
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      onClick={() => toggleQuestion(question.id)}
+                      className={[
+                        "flex min-h-[76px] w-full items-center justify-between gap-5 py-5",
+                        "text-left font-copy text-[16px] font-semibold leading-7 text-ink",
+                        "transition-colors hover:text-coral-text",
+                        "focus-visible:outline-3 focus-visible:outline-offset-[-3px]",
+                        "focus-visible:outline-violet sm:text-[18px]",
+                      ].join(" ")}
                     >
-                      <p className="font-copy text-sm leading-7 text-body">
-                        {item.answer}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </Card>
-          </Reveal>
+                      <span>{question.question}</span>
+
+                      <motion.span
+                        aria-hidden="true"
+                        animate={{
+                          rotate: isOpen ? 45 : 0,
+                        }}
+                        transition={transition}
+                        className="grid size-9 shrink-0 place-items-center rounded-full border border-line bg-surface text-violet"
+                      >
+                        <Plus size={18} strokeWidth={1.8} />
+                      </motion.span>
+                    </button>
+                  </h3>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key={panelId}
+                        id={panelId}
+                        role="region"
+                        aria-labelledby={triggerId}
+                        initial={{
+                          height: 0,
+                          opacity: 0,
+                        }}
+                        animate={{
+                          height: "auto",
+                          opacity: 1,
+                        }}
+                        exit={{
+                          height: 0,
+                          opacity: 0,
+                        }}
+                        transition={transition}
+                        className="overflow-hidden"
+                      >
+                        <p className="max-w-[680px] pb-6 pr-10 font-copy text-base leading-7 text-body sm:text-[17px]">
+                          {question.answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Contact link below the accordion */}
+          <p className="mt-9 text-center font-copy text-sm text-muted sm:text-base">
+            {site.faq.closingText}{" "}
+            <Link
+              href="#contact"
+              className="font-semibold text-coral-text underline decoration-coral-text/40 underline-offset-4 transition-colors hover:text-ink hover:decoration-ink focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-violet"
+            >
+              {site.faq.contactLabel}
+            </Link>
+          </p>
         </div>
       </Container>
     </Section>

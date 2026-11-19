@@ -4,21 +4,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { Button, Container } from "@/components/ui";
+import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
-
-const navigationLinks = [
-  { label: "Features", href: "#features" },
-  { label: "Preview", href: "#preview" },
-  { label: "Roadmap", href: "#roadmap" },
-  { label: "FAQ", href: "#faq" },
-] as const;
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
+      setIsScrolled(window.scrollY > 8);
     };
 
     handleScroll();
@@ -35,12 +29,12 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b bg-paper",
+        "sticky top-0 z-50 border-b bg-paper transition-colors duration-200",
         isScrolled ? "border-line" : "border-transparent",
       )}
     >
       <Container>
-        <div className="flex min-h-16 items-center justify-between gap-3 py-3 md:min-h-20 md:gap-6">
+        <div className="flex h-[72px] items-center justify-between gap-3">
           <Link
             href="#top"
             aria-label="Writespace home"
@@ -48,7 +42,12 @@ export function Navbar() {
           >
             <span
               aria-hidden="true"
-              className="grid size-9 place-items-center rounded-lg bg-lavender font-headline text-xl font-semibold text-ink"
+              className={cn(
+                "relative grid size-9 place-items-center rounded-lg",
+                "bg-ink font-headline text-xl font-semibold text-surface",
+                "after:absolute after:-right-1 after:-top-1 after:size-2.5",
+                "after:rounded-full after:bg-violet after:ring-2 after:ring-paper",
+              )}
             >
               W
             </span>
@@ -62,11 +61,11 @@ export function Navbar() {
             aria-label="Main navigation"
             className="hidden items-center gap-5 md:flex lg:gap-7"
           >
-            {navigationLinks.map((link) => (
+            {site.navigation.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-copy text-sm font-medium text-body hover:text-ink focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-violet"
+                className="font-copy text-[15px] font-medium text-body transition-colors hover:text-ink focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-violet"
               >
                 {link.label}
               </Link>
@@ -74,11 +73,11 @@ export function Navbar() {
           </nav>
 
           <Button
-            href="#waitlist"
+            href={site.hero.primaryAction.href}
             size="md"
             className="shrink-0 max-[380px]:px-3 max-[380px]:text-xs"
           >
-            Get early access
+            {site.hero.primaryAction.label}
           </Button>
         </div>
       </Container>

@@ -2,16 +2,16 @@ import {
   Badge,
   Button,
   Container,
-  HeroVideo,
   Reveal,
   Section,
+  Squiggle,
 } from "@/components/ui";
-
-import { HeroHeadline } from "@/components/sections/hero-headline";
 
 import { ArticleCard } from "@/components/mocks/article-card";
 import { NotificationPill } from "@/components/mocks/notification-pill";
 import { PostCard } from "@/components/mocks/post-card";
+
+import { site } from "@/content/site";
 
 export function Hero() {
   return (
@@ -20,45 +20,54 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
           {/* Left: Hero content */}
           <div className="max-w-copy">
-            <Badge variant="lavender">Early access, opening soon</Badge>
+            <Badge variant="lavender">{site.hero.badge}</Badge>
 
             <Reveal>
-              <HeroHeadline />
+              <h1 className="mt-7 font-headline text-[40px] font-semibold leading-[44px] tracking-[-0.04em] text-ink md:text-[64px] md:leading-[68px]">
+                <span className="block">{site.hero.headline.firstLine}</span>
+
+                <span className="mt-1 block">
+                  {site.hero.headline.secondLinePrefix}
+                  <Squiggle>
+                    <span className="text-coral-text">
+                      {site.hero.headline.highlightedPhrase}
+                    </span>
+                  </Squiggle>
+                </span>
+              </h1>
             </Reveal>
 
-            <p className="mt-6 max-w-copy font-copy text-base leading-7 text-body sm:text-lg sm:leading-8">
-              A home for developers to share quick thoughts and long-form
-              articles, and get real conversations back.
+            <p className="mt-6 max-w-copy font-copy text-lg leading-8 text-body">
+              {site.hero.description}
             </p>
 
             {/* Hero actions */}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button href="#waitlist" size="lg" className="w-full sm:w-auto">
-                Get early access
+              <Button
+                href={site.hero.primaryAction.href}
+                size="lg"
+                className="w-full sm:w-auto"
+              >
+                {site.hero.primaryAction.label}
               </Button>
 
               <Button
-                href="#features"
+                href={site.hero.secondaryAction.href}
                 variant="secondary"
                 size="lg"
                 className="w-full sm:w-auto"
               >
-                See how it works
+                {site.hero.secondaryAction.label}
               </Button>
             </div>
 
             <p className="mt-5 font-copy text-sm text-muted">
-              One email when the doors open. No spam.
+              {site.hero.reassurance}
             </p>
           </div>
 
-          {/* Right: Hero video and product previews */}
+          {/* Right: Static product mock cards */}
           <div className="relative mx-auto w-full max-w-xl pb-2 lg:mx-0 lg:pb-10">
-            {/* Real hero video */}
-            <Reveal className="mb-5">
-              <HeroVideo />
-            </Reveal>
-
             {/* Post preview */}
             <div className="relative z-20 lg:-rotate-2">
               <Reveal>

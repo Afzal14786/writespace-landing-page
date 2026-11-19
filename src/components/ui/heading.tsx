@@ -6,14 +6,18 @@ export type HeadingLevel = 1 | 2 | 3;
 type HeadingProps = Omit<ComponentPropsWithoutRef<"h1">, "children"> & {
   level?: HeadingLevel;
   children: string;
-  /** Highlights the first whole-word match, if present. */
+  /** Highlights the first matching word or phrase in coral text. */
   highlight?: string;
 };
 
+/*
+ * Typography follows the landing-page design guide.
+ * Values are mobile first, followed by desktop sizes at the md breakpoint.
+ */
 const levelClasses: Record<HeadingLevel, string> = {
-  1: "text-4xl md:text-5xl lg:text-6xl",
-  2: "text-3xl md:text-4xl lg:text-5xl",
-  3: "text-2xl md:text-3xl",
+  1: "text-[40px] leading-[44px] md:text-[64px] md:leading-[68px] tracking-[-0.04em]",
+  2: "text-[30px] leading-[36px] md:text-[40px] md:leading-[46px]",
+  3: "text-[20px] leading-[26px] md:text-[24px] md:leading-[30px]",
 };
 
 function escapeRegExp(value: string): string {
@@ -21,20 +25,31 @@ function escapeRegExp(value: string): string {
 }
 
 function renderHighlightedText(text: string, highlight?: string): ReactNode {
-  if (!highlight?.trim()) return text;
+  const phrase = highlight?.trim();
 
-  const match = new RegExp(`\\b${escapeRegExp(highlight)}\\b`, "i").exec(text);
+  if (!phrase) return text;
+
+  /*
+   * Match the requested phrase without accidentally highlighting it
+   * when it appears as part of a larger word.
+   */
+  const pattern = new RegExp(`(^|\\W)(${escapeRegExp(phrase)})(?=$|\\W)`, "i");
+
+  const match = pattern.exec(text);
 
   if (!match || match.index === undefined) return text;
 
-  const start = match.index;
-  const end = start + match[0].length;
+  const prefixLength = match[1].length;
+  const highlightedText = match[2];
 
-  // Only the first whole-word match is highlighted to keep emphasis intentional.
+  const start = match.index + prefixLength;
+  const end = start + highlightedText.length;
+
+  // Only the first matching phrase is highlighted to keep emphasis intentional.
   return (
     <>
       {text.slice(0, start)}
-      <span className="text-coral-text">{text.slice(start, end)}</span>
+      <span className="text-coral-text">{highlightedText}</span>
       {text.slice(end)}
     </>
   );
@@ -49,7 +64,7 @@ export function Heading({
   ...props
 }: HeadingProps) {
   const classes = cn(
-    "font-headline font-semibold leading-tight tracking-tight text-ink",
+    "font-headline font-semibold tracking-tight text-ink",
     levelClasses[level],
     className,
   );
