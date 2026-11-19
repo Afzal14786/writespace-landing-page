@@ -1,11 +1,11 @@
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Problem } from "@/components/sections/problem";
+import { OneIdea } from "@/components/sections/one-idea";
 import { Benefits } from "@/components/sections/benefits";
 import { Preview } from "@/components/sections/preview";
+import { Developers } from "@/components/sections/developers";
 import { Audience } from "@/components/sections/audience";
-import { FounderNote } from "@/components/sections/founder-note";
-import { Roadmap } from "@/components/sections/roadmap";
 import { FAQ } from "@/components/sections/faq";
 import { Waitlist } from "@/components/sections/waitlist";
 import { Footer } from "@/components/sections/footer";
@@ -18,11 +18,11 @@ export default function Home() {
       <main>
         <Hero />
         <Problem />
+        <OneIdea />
         <Benefits />
         <Preview />
+        <Developers />
         <Audience />
-        <FounderNote />
-        <Roadmap />
         <FAQ />
         <Waitlist />
       </main>
