@@ -3,44 +3,59 @@
 :root {
   color-scheme: light;
 
+  /* Brand colours */
   --paper: #fff8f2;
   --surface: #ffffff;
   --lavender: #f1eeff;
   --peach: #ffece5;
+
   --ink: #181438;
+  --ink-deep: #0f0c28;
+
   --body: #4b4766;
   --muted: #6b6785;
   --line: #e4dcef;
+
   --coral: #fc745c;
   --coral-text: #e85a41;
   --violet: #8878f0;
+  --lavender-text: #3c3489;
 }
 
 /*
  * Semantic theme tokens keep component styles tied to the Writespace brand.
- * The font custom properties are supplied by next/font on the root element.
+ * Font custom properties are supplied by next/font on the root element.
  */
 @theme inline {
+  /* Colours */
   --color-paper: var(--paper);
   --color-surface: var(--surface);
   --color-lavender: var(--lavender);
   --color-peach: var(--peach);
+
   --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
+
   --color-body: var(--body);
   --color-muted: var(--muted);
   --color-line: var(--line);
+
   --color-coral: var(--coral);
   --color-coral-text: var(--coral-text);
   --color-violet: var(--violet);
+  --color-lavender-text: var(--lavender-text);
 
+  /* Typography */
   --font-headline: var(--font-display);
   --font-copy: var(--font-body);
   --font-code: var(--font-mono);
 
+  /* Shape */
   --radius-card: 16px;
   --radius-panel: 24px;
   --radius-pill: 9999px;
 
+  /* Shadows */
   --shadow-soft: 0 12px 32px rgb(24 20 56 / 8%);
   --shadow-card: 0 4px 18px rgb(24 20 56 / 6%);
 
@@ -49,7 +64,7 @@
   --container-copy: 44rem;
 
   /* Responsive spacing */
-  --spacing-page-gutter: clamp(1rem, 4vw, 3.5rem);
+  --spacing-page-gutter: clamp(1.25rem, 2vw, 1.5rem);
   --spacing-section-mobile: 4rem;
   --spacing-section-desktop: 6rem;
 }
@@ -67,6 +82,8 @@ body {
   background: var(--paper);
   color: var(--body);
   font-family: var(--font-body), sans-serif;
+  font-size: 16px;
+  line-height: 1.625;
   text-rendering: optimizeLegibility;
 }
 
