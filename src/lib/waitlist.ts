@@ -19,36 +19,35 @@ function readIntegrationEnvironment(): WaitlistIntegrationEnvironment {
 }
 
 /**
- * Temporary waitlist storage adapter.
+ * Temporary waitlist adapter.
  *
- * Currently this only logs the submitted email and returns success.
- * Replace this implementation with persistent storage before launch.
+ * This implementation only logs submissions on the server.
+ * Replace it with persistent storage before accepting real signups.
  */
 export async function saveWaitlistEmail(
   email: string,
+  topic?: string,
 ): Promise<{ success: true }> {
   const integrationEnvironment = readIntegrationEnvironment();
 
-  // Log whether future integration settings are present, without
-  // logging any credentials. Their presence does not activate an integration.
+  // Log whether future integration settings are present, never their values.
   const optionalEnvironmentValuesPresent = Object.values(
     integrationEnvironment,
   ).some(Boolean);
 
-  // TODO: Connect your own Writespace API.
-  // Use WRITESPACE_API_URL and WRITESPACE_API_KEY to securely
-  // send the waitlist email to your backend.
+  // TODO: Connect your own Writespace API using the server-side
+  // WRITESPACE_API_URL and WRITESPACE_API_KEY environment variables.
 
-  // TODO: Connect an email service.
-  // Use WAITLIST_EMAIL_SERVICE_API_KEY from the server environment
-  // when you decide which email provider to use.
+  // TODO: Connect an email service using
+  // WAITLIST_EMAIL_SERVICE_API_KEY when a provider is selected.
 
-  // TODO: Connect persistent database storage.
-  // Use WAITLIST_DATABASE_URL when implementing the database adapter.
-  // Add duplicate-email handling and an appropriate retention policy.
+  // TODO: Persist signups and optional topics in a database using
+  // WAITLIST_DATABASE_URL. Add duplicate-email handling and a
+  // retention policy before enabling public waitlist submissions.
 
-  console.info("[waitlist] New signup received", {
+  console.info("[waitlist] Submission received", {
     email,
+    topic: topic || undefined,
     optionalEnvironmentValuesPresent,
     adapter: "temporary-log-only",
   });
