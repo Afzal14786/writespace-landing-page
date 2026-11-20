@@ -1,40 +1,54 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 
 import { Squiggle } from "@/components/ui";
+import { site } from "@/content/site";
 
 export function HeroHeadline() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // The cursor blinks only while the headline is visible.
+  const isInView = useInView(headingRef, { amount: 0.25 });
+
   const prefersReducedMotion = useReducedMotion();
 
+  // Do not animate until the motion preference is known.
+  const shouldReduceMotion = prefersReducedMotion !== false;
+
   return (
-    <h1 className="mt-7 font-headline text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl lg:text-6xl">
-      <span className="block">Think out loud.</span>
+    <h1
+      ref={headingRef}
+      className="mt-7 font-headline text-[40px] font-semibold leading-[44px] tracking-[-0.04em] text-ink md:text-[64px] md:leading-[68px]"
+    >
+      <span className="block">{site.hero.headline.firstLine}</span>
 
       <span className="mt-1 block">
-        Then{" "}
+        {site.hero.headline.secondLinePrefix}
         <Squiggle>
-          <span className="text-coral-text">go deep.</span>
-        </Squiggle>
-        {prefersReducedMotion ? (
-          <span aria-hidden="true" className="ml-1 inline-block text-ink">
-            |
+          <span className="text-coral-text">
+            {site.hero.headline.highlightedPhrase}
           </span>
-        ) : (
-          <motion.span
-            aria-hidden="true"
-            className="ml-1 inline-block text-ink"
-            animate={{ opacity: [1, 0] }}
-            transition={{
-              duration: 0.4,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeOut",
-            }}
-          >
-            |
-          </motion.span>
-        )}
+        </Squiggle>
+
+        <motion.span
+          aria-hidden="true"
+          className="ml-1 inline-block text-ink"
+          animate={
+            !shouldReduceMotion && isInView
+              ? { opacity: [1, 0] }
+              : { opacity: 1 }
+          }
+          transition={{
+            duration: 0.4,
+            repeat: !shouldReduceMotion && isInView ? Infinity : 0,
+            repeatType: "reverse",
+            ease: "easeOut",
+          }}
+        >
+          |
+        </motion.span>
       </span>
     </h1>
   );
