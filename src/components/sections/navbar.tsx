@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { Button, Container } from "@/components/ui";
 import { site } from "@/content/site";
+import { assets } from "@/lib/assets";
 import { cn } from "@/lib/cn";
 
 export function Navbar() {
@@ -40,20 +42,29 @@ export function Navbar() {
             aria-label="Writespace home"
             className="inline-flex shrink-0 items-center gap-2"
           >
-            <span
-              aria-hidden="true"
-              className={cn(
-                "relative grid size-9 place-items-center rounded-lg",
-                "bg-ink font-headline text-xl font-semibold text-surface",
-                "after:absolute after:-right-1 after:-top-1 after:size-2.5",
-                "after:rounded-full after:bg-violet after:ring-2 after:ring-paper",
-              )}
-            >
-              W
+            <span aria-hidden="true" className="relative size-9 shrink-0">
+              <Image
+                src={assets.brand.emblem.src}
+                alt=""
+                fill
+                sizes="36px"
+                className="object-contain"
+                priority
+              />
             </span>
 
-            <span className="font-headline text-xl font-semibold tracking-tight text-ink">
-              Writespace
+            <span
+              aria-hidden="true"
+              className="relative h-7 w-[112px] shrink-0 sm:w-[132px]"
+            >
+              <Image
+                src={assets.brand.wordmark.src}
+                alt=""
+                fill
+                sizes="(min-width: 640px) 132px, 112px"
+                className="object-contain object-left"
+                priority
+              />
             </span>
           </Link>
 
