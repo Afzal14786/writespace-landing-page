@@ -38,19 +38,22 @@ const aspectRatioClasses: Record<ImageAspectRatio, string> = {
   phone: "aspect-[780/1688]",
   portrait: "aspect-[4/5]",
   square: "aspect-square",
-  video: "aspect-video",
+  video: "aspect-[16/10]",
   social: "aspect-[1200/630]",
 };
 
 /**
- * Default responsive source sizes for common Writespace layouts.
+ * Responsive source sizes based on the actual rendered dimensions.
+ *
+ * These values help the browser select an appropriately sized image
+ * instead of downloading a much larger source than the layout needs.
  */
 const responsiveSizes: Record<ImageAspectRatio, string> = {
-  preview: "(max-width: 767px) 84vw, (max-width: 1023px) 70vw, 33vw",
-  phone: "(max-width: 767px) 26vw, 104px",
-  portrait: "(max-width: 1023px) 90vw, 36vw",
-  square: "(max-width: 767px) 40vw, 160px",
-  video: "(max-width: 767px) 90vw, (max-width: 1023px) 70vw, 50vw",
+  preview: "(max-width: 639px) 84vw, (max-width: 1023px) 70vw, 880px",
+  phone: "(max-width: 639px) min(84vw, 300px), 260px",
+  portrait: "(max-width: 639px) 90vw, (max-width: 1023px) 60vw, 400px",
+  square: "(max-width: 639px) 40vw, 160px",
+  video: "(max-width: 639px) 90vw, (max-width: 1023px) 70vw, 640px",
   social: "1200px",
 };
 
