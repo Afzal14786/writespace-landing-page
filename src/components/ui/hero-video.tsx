@@ -147,7 +147,7 @@ export function HeroVideo({ className }: HeroVideoProps) {
     <div
       ref={containerRef}
       className={cn(
-        "relative aspect-video w-full overflow-hidden rounded-panel border border-line bg-lavender shadow-card",
+        "relative aspect-[16/10] w-full overflow-hidden rounded-panel border border-line bg-lavender shadow-card",
         className,
       )}
     >

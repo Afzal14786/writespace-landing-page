@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, GitBranch } from "lucide-react";
 
 import { Button, Container } from "@/components/ui";
 import { site } from "@/content/site";
+import { assets } from "@/lib/assets";
 
 type SocialLink = {
   label: string;
@@ -46,25 +48,27 @@ export function Footer() {
 
   // Empty contact placeholders are intentionally omitted instead of
   // rendering invented or non-functional social links.
-  const socialLinks = (
-    [
-      {
-        label: "LinkedIn",
-        href: contact.linkedin,
-        mark: "linkedin",
-      },
-      {
-        label: "GitHub",
-        href: contact.github,
-        mark: "github",
-      },
-      {
-        label: "X",
-        href: contact.x,
-        mark: "x",
-      },
-    ] satisfies SocialLink[]
-  ).filter((link) => link.href.trim().length > 0);
+  const socialLinks = [
+    {
+      label: "LinkedIn",
+      href: contact.linkedin,
+      mark: "linkedin",
+    },
+    {
+      label: "GitHub",
+      href: contact.github,
+      mark: "github",
+    },
+    {
+      label: "X",
+      href: contact.x,
+      mark: "x",
+    },
+  ] satisfies SocialLink[];
+
+  const visibleSocialLinks = socialLinks.filter(
+    (link) => link.href.trim().length > 0,
+  );
 
   const helloHref = contact.email
     ? `mailto:${contact.email}?subject=${encodeURIComponent(contact.sayHelloSubject)}`
@@ -84,16 +88,23 @@ export function Footer() {
               aria-label="Writespace home"
               className="inline-flex items-center gap-3 rounded-md focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-violet"
             >
-              <span
-                aria-hidden="true"
-                className="relative grid size-10 place-items-center rounded-xl bg-violet font-headline text-2xl font-semibold text-surface after:absolute after:-right-1 after:-top-1 after:size-2.5 after:rounded-full after:bg-coral after:ring-2 after:ring-ink-deep"
-              >
-                W
-              </span>
+              {/* Use the white emblem on the dark footer background. */}
+              <Image
+                src={assets.brand.emblemOnDark.src}
+                alt=""
+                width={40}
+                height={40}
+                className="size-10 shrink-0 object-contain"
+              />
 
-              <span className="font-headline text-xl font-semibold tracking-tight text-surface">
-                Writespace
-              </span>
+              {/* Convert the monochrome wordmark to white for contrast. */}
+              <Image
+                src={assets.brand.wordmark.src}
+                alt=""
+                width={164}
+                height={32}
+                className="h-7 w-auto object-contain brightness-0 invert"
+              />
             </Link>
 
             <p className="mt-5 font-headline text-lg font-semibold leading-snug text-surface">
@@ -141,9 +152,9 @@ export function Footer() {
               </p>
             )}
 
-            {socialLinks.length > 0 ? (
+            {visibleSocialLinks.length > 0 ? (
               <div className="mt-5 flex flex-wrap gap-3">
-                {socialLinks.map((link) => (
+                {visibleSocialLinks.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
