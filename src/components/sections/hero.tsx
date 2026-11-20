@@ -1,11 +1,6 @@
-import {
-  Badge,
-  Button,
-  Container,
-  Reveal,
-  Section,
-  Squiggle,
-} from "@/components/ui";
+import { Badge, Button, Container, Reveal, Section } from "@/components/ui";
+
+import { HeroHeadline } from "./hero-headline";
 
 import { ArticleCard } from "@/components/mocks/article-card";
 import { NotificationPill } from "@/components/mocks/notification-pill";
@@ -23,18 +18,7 @@ export function Hero() {
             <Badge variant="lavender">{site.hero.badge}</Badge>
 
             <Reveal>
-              <h1 className="mt-7 font-headline text-[40px] font-semibold leading-[44px] tracking-[-0.04em] text-ink md:text-[64px] md:leading-[68px]">
-                <span className="block">{site.hero.headline.firstLine}</span>
-
-                <span className="mt-1 block">
-                  {site.hero.headline.secondLinePrefix}
-                  <Squiggle>
-                    <span className="text-coral-text">
-                      {site.hero.headline.highlightedPhrase}
-                    </span>
-                  </Squiggle>
-                </span>
-              </h1>
+              <HeroHeadline />
             </Reveal>
 
             <p className="mt-6 max-w-copy font-copy text-lg leading-8 text-body">
