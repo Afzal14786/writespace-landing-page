@@ -1,7 +1,12 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
+
 import type { LucideIcon } from "lucide-react";
 import { AtSign, Code2, GitBranch, Link2, LockKeyhole } from "lucide-react";
 
-import { Container, Heading, Section } from "@/components/ui";
+import { Container, Heading, Reveal, Section } from "@/components/ui";
 
 import { site } from "@/content/site";
 
@@ -30,48 +35,114 @@ const stageStyles = {
 export function Developers() {
   const content = site.developers;
 
+  const pipelineRef = useRef<HTMLDivElement>(null);
+
+  // Start the pipeline animation only when it enters the viewport.
+  const pipelineInView = useInView(pipelineRef, {
+    once: true,
+    amount: 0.3,
+  });
+
+  const prefersReducedMotion = useReducedMotion();
+  const shouldReduceMotion = prefersReducedMotion !== false;
+
+  // Reduced-motion users see the completed publishing workflow immediately.
+  const pipelineStarted = shouldReduceMotion || pipelineInView;
+
+  const publishedDelay =
+    Math.max(0, content.pipeline.stages.length - 1) * 0.35 + 0.35;
+
   return (
     <Section id="developers" background="ink">
       <Container>
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
           {/* Section introduction */}
-          <div className="lg:col-span-5">
-            <p className="font-mono text-[13px] tracking-[0.16em] text-violet">
-              {content.eyebrow}
-            </p>
+          <Reveal className="lg:col-span-5">
+            <div>
+              <p className="font-mono text-[13px] tracking-[0.16em] text-violet">
+                {content.eyebrow}
+              </p>
 
-            <Heading level={2} className="mt-4 text-surface">
-              {content.heading}
-            </Heading>
+              <Heading level={2} className="mt-4 text-surface">
+                {content.heading}
+              </Heading>
 
-            <p className="mt-5 max-w-copy font-copy text-base leading-7 text-[#D8D4E4] sm:text-[17px]">
-              {content.description}
-            </p>
-          </div>
+              <p className="mt-5 max-w-copy font-copy text-base leading-7 text-[#D8D4E4] sm:text-[17px]">
+                {content.description}
+              </p>
+            </div>
+          </Reveal>
 
           {/* Draft → Scheduled → Published pipeline */}
           <div className="lg:col-span-7">
-            <div className="relative">
+            <div ref={pipelineRef} className="relative">
+              {/* The timeline fills from Draft toward Published. */}
               <div
                 aria-hidden="true"
-                className="absolute left-[16%] right-[16%] top-[22px] hidden h-px bg-white/20 sm:block"
-              />
+                className="absolute left-[16%] right-[16%] top-[22px] hidden h-px overflow-hidden bg-white/20 sm:block"
+              >
+                <motion.div
+                  initial={shouldReduceMotion ? false : { scaleX: 0 }}
+                  animate={{
+                    scaleX: pipelineStarted ? 1 : 0,
+                  }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 1.05,
+                    ease: "easeInOut",
+                  }}
+                  className="h-full origin-left bg-gradient-to-r from-violet via-amber-400 to-coral"
+                />
+              </div>
 
               <ol
                 aria-label="Example publishing workflow"
                 className="relative grid grid-cols-1 gap-4 sm:grid-cols-3"
               >
-                {content.pipeline.stages.map((stage) => {
+                {content.pipeline.stages.map((stage, index) => {
                   const style = stageStyles[stage.color];
+                  const isPublished =
+                    index === content.pipeline.stages.length - 1;
 
                   return (
-                    <li
+                    <motion.li
                       key={stage.id}
+                      initial={
+                        shouldReduceMotion
+                          ? false
+                          : {
+                              opacity: 0,
+                              y: 12,
+                            }
+                      }
+                      animate={
+                        pipelineStarted
+                          ? {
+                              opacity: 1,
+                              y: 0,
+                            }
+                          : {
+                              opacity: 0,
+                              y: 12,
+                            }
+                      }
+                      transition={{
+                        duration: shouldReduceMotion ? 0 : 0.35,
+                        delay: shouldReduceMotion ? 0 : index * 0.35,
+                        ease: "easeOut",
+                      }}
                       className="relative rounded-panel border border-white/10 bg-[#231E4D] p-4 sm:min-h-[205px] sm:p-5"
                     >
                       <div className="relative z-10 flex items-center gap-2">
-                        <span
+                        <motion.span
                           aria-hidden="true"
+                          animate={{
+                            scale: pipelineStarted ? 1 : 0.75,
+                          }}
+                          transition={{
+                            duration: shouldReduceMotion ? 0 : 0.3,
+                            delay: shouldReduceMotion ? 0 : index * 0.35,
+                            ease: "easeOut",
+                          }}
                           className={`size-2.5 shrink-0 rounded-full ring-4 ring-[#231E4D] ${style.dot}`}
                         />
 
@@ -88,12 +159,33 @@ export function Developers() {
                         {stage.description}
                       </p>
 
-                      <span
+                      <motion.span
+                        initial={
+                          shouldReduceMotion
+                            ? false
+                            : {
+                                opacity: 0,
+                                scale: 0.85,
+                              }
+                        }
+                        animate={{
+                          opacity: pipelineStarted ? 1 : 0,
+                          scale: pipelineStarted ? 1 : 0.85,
+                        }}
+                        transition={{
+                          duration: shouldReduceMotion ? 0 : 0.3,
+                          delay: shouldReduceMotion
+                            ? 0
+                            : isPublished
+                              ? publishedDelay
+                              : index * 0.35 + 0.2,
+                          ease: "easeOut",
+                        }}
                         className={`mt-5 inline-flex rounded-pill px-3 py-1 font-mono text-[11px] ${style.status}`}
                       >
                         {stage.statusText}
-                      </span>
-                    </li>
+                      </motion.span>
+                    </motion.li>
                   );
                 })}
               </ol>
@@ -109,7 +201,12 @@ export function Developers() {
             return (
               <article
                 key={point.id}
-                className="group rounded-panel border border-white/10 bg-white/[0.035] p-5 transition-transform duration-200 hover:-translate-y-1"
+                className={[
+                  "group rounded-panel border border-white/10",
+                  "bg-white/[0.035] p-5",
+                  "motion-safe:transition-transform motion-safe:duration-200",
+                  "motion-safe:ease-out motion-safe:hover:-translate-y-0.5",
+                ].join(" ")}
               >
                 <div className="grid size-10 place-items-center rounded-full bg-white/10 text-violet transition-colors duration-200 group-hover:bg-coral group-hover:text-ink">
                   <PointIcon aria-hidden="true" className="size-5" />
