@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
 
 import type { FocusEvent, KeyboardEvent, ReactNode } from "react";
-
+import { HeroVideo } from "@/components/ui/hero-video";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import {
@@ -14,7 +14,6 @@ import {
   Heart,
   LockKeyhole,
   MessageCircle,
-  Sparkles,
 } from "lucide-react";
 
 import {
@@ -538,11 +537,15 @@ export function Preview() {
                   screenId={activeTab.id}
                   reducedMotion={reducedMotion}
                 >
-                  <PreviewScreenImage
-                    asset={desktopScreens[activeTab.id]}
-                    aspectRatio="desktop"
-                    sizes="(min-width: 1024px) 880px, 100vw"
-                  />
+                  {activeTab.id === "feed" ? (
+                    <HeroVideo className="!rounded-none !border-0 !shadow-none" />
+                  ) : (
+                    <PreviewScreenImage
+                      asset={desktopScreens[activeTab.id]}
+                      aspectRatio="desktop"
+                      sizes="(min-width: 1024px) 880px, 100vw"
+                    />
+                  )}
                 </PreviewTransition>
               </BrowserFrame>
 
