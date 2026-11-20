@@ -26,10 +26,10 @@ const revealTransition = {
 };
 
 /**
- * Fades content in and lifts it by 12px the first time it enters view.
+ * Fades content in and lifts it by 24px the first time it enters view.
  *
- * Reduced-motion users receive the same content immediately,
- * without entrance transforms or opacity transitions.
+ * Reduced-motion users receive the content immediately, without
+ * entrance transforms or opacity transitions.
  *
  * Motion's HTMLMotionProps avoids conflicts between native DOM
  * event handlers and Motion-specific event handler types.
@@ -37,24 +37,25 @@ const revealTransition = {
 export function Reveal({ children, className, ...props }: RevealProps) {
   const prefersReducedMotion = useReducedMotion();
 
-  // Keep the content visible without entrance animation when requested.
-  if (prefersReducedMotion) {
-    return (
-      <motion.div className={cn(className)} {...props}>
-        {children}
-      </motion.div>
-    );
-  }
+  // Disable entrance animation until the user's motion preference is known.
+  const shouldReduceMotion = prefersReducedMotion !== false;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{
-        once: true,
-        amount: 0.15,
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={
+        shouldReduceMotion
+          ? undefined
+          : {
+              once: true,
+              amount: 0.15,
+            }
+      }
+      transition={{
+        ...revealTransition,
+        duration: shouldReduceMotion ? 0 : revealTransition.duration,
       }}
-      transition={revealTransition}
       className={cn(className)}
       {...props}
     >

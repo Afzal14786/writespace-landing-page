@@ -1,6 +1,12 @@
+"use client";
+
 import { Heart, Lightbulb, MessageCircle, Sparkles } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 export function ConnectPreview() {
+  const prefersReducedMotion = useReducedMotion();
+  const shouldReduceMotion = prefersReducedMotion !== false;
+
   return (
     <div
       role="group"
@@ -45,22 +51,72 @@ export function ConnectPreview() {
         </div>
       </div>
 
-      {/* Reaction examples with counts */}
+      {/* Reaction examples with counts and subtle spring interactions. */}
       <div
         aria-label="Reaction examples"
         className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4"
       >
         <span className="inline-flex min-h-8 items-center gap-1.5 rounded-pill border border-line bg-surface px-3 text-xs text-body">
-          <Heart size={14} className="text-coral-text" aria-hidden="true" />
+          <motion.span
+            aria-hidden="true"
+            className="inline-flex"
+            whileHover={
+              shouldReduceMotion ? undefined : { scale: 1.18, rotate: -8 }
+            }
+            whileTap={
+              shouldReduceMotion ? undefined : { scale: 1.25, rotate: 8 }
+            }
+            transition={{
+              type: "spring",
+              duration: 0.32,
+              bounce: 0.4,
+            }}
+          >
+            <Heart size={14} className="text-coral-text" />
+          </motion.span>
           12
         </span>
 
         <span className="inline-flex min-h-8 items-center gap-1.5 rounded-pill border border-line bg-surface px-3 text-xs text-body">
-          <Lightbulb size={14} className="text-violet" aria-hidden="true" />4
+          <motion.span
+            aria-hidden="true"
+            className="inline-flex"
+            whileHover={
+              shouldReduceMotion ? undefined : { scale: 1.18, rotate: -8 }
+            }
+            whileTap={
+              shouldReduceMotion ? undefined : { scale: 1.25, rotate: 8 }
+            }
+            transition={{
+              type: "spring",
+              duration: 0.32,
+              bounce: 0.4,
+            }}
+          >
+            <Lightbulb size={14} className="text-violet" />
+          </motion.span>
+          4
         </span>
 
         <span className="inline-flex min-h-8 items-center gap-1.5 rounded-pill border border-line bg-surface px-3 text-xs text-body">
-          <Sparkles size={14} className="text-ink" aria-hidden="true" />3
+          <motion.span
+            aria-hidden="true"
+            className="inline-flex"
+            whileHover={
+              shouldReduceMotion ? undefined : { scale: 1.18, rotate: -8 }
+            }
+            whileTap={
+              shouldReduceMotion ? undefined : { scale: 1.25, rotate: 8 }
+            }
+            transition={{
+              type: "spring",
+              duration: 0.32,
+              bounce: 0.4,
+            }}
+          >
+            <Sparkles size={14} className="text-ink" />
+          </motion.span>
+          3
         </span>
 
         <span className="sr-only">

@@ -4,7 +4,14 @@ import { useEffect, useId, useRef, useState } from "react";
 
 import type { FocusEvent, KeyboardEvent } from "react";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import {
+  animate,
+  AnimatePresence,
+  motion,
+  useInView,
+  useMotionValue,
+  useReducedMotion,
+} from "motion/react";
 
 import { BookOpen, Code2, GitBranch, Users } from "lucide-react";
 
@@ -104,25 +111,110 @@ type TopicMarqueeProps = {
   prefersReducedMotion: boolean;
 };
 
+type MarqueeAnimationControls = {
+  pause: () => void;
+  play: () => void;
+  stop: () => void;
+};
+
+/**
+ * Controls one row of the topic marquee.
+ *
+ * Animation playback is paused rather than reset when the marquee
+ * leaves the viewport or the visitor hovers over it. This preserves
+ * the current position when the animation resumes.
+ */
+function MarqueeTrack({
+  row,
+  rowIndex,
+  isPaused,
+  prefersReducedMotion,
+}: {
+  row: readonly string[];
+  rowIndex: number;
+  isPaused: boolean;
+  prefersReducedMotion: boolean;
+}) {
+  const x = useMotionValue("0%");
+  const animationRef = useRef<MarqueeAnimationControls | null>(null);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      x.set("0%");
+      return;
+    }
+
+    const start = rowIndex === 0 ? "0%" : "-50%";
+    const end = rowIndex === 0 ? "-50%" : "0%";
+
+    // Set the starting position before creating the infinite animation.
+    x.set(start);
+
+    const controls = animate(x, [start, end], {
+      duration: rowIndex === 0 ? 38 : 44,
+      repeat: Infinity,
+      ease: "linear",
+    });
+
+    animationRef.current = controls;
+
+    return () => {
+      controls.stop();
+      animationRef.current = null;
+    };
+  }, [x, rowIndex, prefersReducedMotion]);
+
+  useEffect(() => {
+    const controls = animationRef.current;
+
+    if (!controls) return;
+
+    if (isPaused || prefersReducedMotion) {
+      controls.pause();
+    } else {
+      controls.play();
+    }
+  }, [isPaused, prefersReducedMotion]);
+
+  return (
+    <motion.div aria-hidden="true" className="flex w-max gap-3" style={{ x }}>
+      {[...row, ...row].map((topic, index) => (
+        <span
+          key={`${rowIndex}-${topic}-${index}`}
+          className="inline-flex min-h-10 items-center rounded-pill border border-[#D8D0EF] bg-surface/80 px-4 font-copy text-sm font-medium text-lavender-text"
+        >
+          {topic}
+        </span>
+      ))}
+    </motion.div>
+  );
+}
+
 function TopicMarquee({
   topics,
   label,
   prefersReducedMotion,
 }: TopicMarqueeProps) {
-  const [isPaused, setIsPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  // Track visibility so continuous animation pauses outside the viewport.
+  const isInView = useInView(marqueeRef, { amount: 0.1 });
 
   const firstRow = [...topics];
   const secondRow = [...topics].reverse();
 
   const rows = [firstRow, secondRow];
 
-  const shouldStop = prefersReducedMotion || isPaused;
+  const shouldPause = prefersReducedMotion || isHovered || !isInView;
 
   return (
     <div
+      ref={marqueeRef}
       className="mt-12 overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <p className="mb-5 text-center font-mono text-xs tracking-wide text-lavender-text">
         {label}
@@ -131,31 +223,12 @@ function TopicMarquee({
       <div className="space-y-3">
         {rows.map((row, rowIndex) => (
           <div key={rowIndex} className="overflow-hidden">
-            <motion.div
-              aria-hidden="true"
-              className="flex w-max gap-3"
-              animate={
-                shouldStop
-                  ? { x: 0 }
-                  : {
-                      x: rowIndex === 0 ? ["0%", "-50%"] : ["-50%", "0%"],
-                    }
-              }
-              transition={{
-                duration: rowIndex === 0 ? 38 : 44,
-                repeat: shouldStop ? 0 : Infinity,
-                ease: "linear",
-              }}
-            >
-              {[...row, ...row].map((topic, index) => (
-                <span
-                  key={`${rowIndex}-${topic}-${index}`}
-                  className="inline-flex min-h-10 items-center rounded-pill border border-[#D8D0EF] bg-surface/80 px-4 font-copy text-sm font-medium text-lavender-text"
-                >
-                  {topic}
-                </span>
-              ))}
-            </motion.div>
+            <MarqueeTrack
+              row={row}
+              rowIndex={rowIndex}
+              isPaused={shouldPause}
+              prefersReducedMotion={prefersReducedMotion}
+            />
           </div>
         ))}
       </div>
@@ -176,8 +249,11 @@ export function Audience() {
   const id = useId();
   const panelId = `${id}-audience-panel`;
 
-  const prefersReducedMotion = useReducedMotion();
+  const motionPreference = useReducedMotion();
   const activeTab = tabs[activeIndex];
+
+  // Keep animations disabled until the motion preference is known.
+  const prefersReducedMotion = motionPreference !== false;
 
   /*
    * Rotate through the audience examples until the visitor interacts.
@@ -373,7 +449,7 @@ export function Audience() {
         <TopicMarquee
           topics={site.audience.topics}
           label={site.audience.topicsLabel}
-          prefersReducedMotion={Boolean(prefersReducedMotion)}
+          prefersReducedMotion={prefersReducedMotion}
         />
       </Container>
     </Section>

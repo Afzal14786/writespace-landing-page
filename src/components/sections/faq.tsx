@@ -5,7 +5,14 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
-import { Container, Heading, Section } from "@/components/ui";
+import {
+  Container,
+  Heading,
+  Reveal,
+  Section,
+  Stagger,
+  StaggerItem,
+} from "@/components/ui";
 
 import { site } from "@/content/site";
 
@@ -17,8 +24,11 @@ export function FAQ() {
 
   const prefersReducedMotion = useReducedMotion();
 
+  // Keep animations disabled until the motion preference is known.
+  const shouldReduceMotion = prefersReducedMotion !== false;
+
   const transition = {
-    duration: prefersReducedMotion ? 0 : 0.25,
+    duration: shouldReduceMotion ? 0 : 0.25,
     ease: "easeInOut" as const,
   };
 
@@ -30,17 +40,19 @@ export function FAQ() {
     <Section id="faq" background="paper">
       <Container>
         <div className="mx-auto max-w-[760px]">
-          {/* Centered section introduction */}
-          <div className="text-center">
-            <Heading level={2}>{site.faq.heading}</Heading>
+          {/* Centered section introduction enters when it reaches the viewport. */}
+          <Reveal>
+            <div className="text-center">
+              <Heading level={2}>{site.faq.heading}</Heading>
 
-            <p className="mt-4 font-copy text-base leading-7 text-body sm:text-[17px]">
-              {site.faq.description}
-            </p>
-          </div>
+              <p className="mt-4 font-copy text-base leading-7 text-body sm:text-[17px]">
+                {site.faq.description}
+              </p>
+            </div>
+          </Reveal>
 
-          {/* Accessible single-open accordion */}
-          <div className="mt-10 border-t border-line">
+          {/* FAQ rows enter sequentially with an 80ms stagger. */}
+          <Stagger className="mt-10 border-t border-line">
             {site.faq.questions.map((question) => {
               const isOpen = openId === question.id;
 
@@ -48,7 +60,7 @@ export function FAQ() {
               const panelId = `faq-panel-${question.id}`;
 
               return (
-                <div key={question.id} className="border-b border-line">
+                <StaggerItem key={question.id} className="border-b border-line">
                   <h3>
                     <button
                       id={triggerId}
@@ -79,6 +91,7 @@ export function FAQ() {
                     </button>
                   </h3>
 
+                  {/* Preserve the existing accordion expand/collapse animation. */}
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
@@ -107,12 +120,12 @@ export function FAQ() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </Stagger>
 
-          {/* Contact link below the accordion */}
+          {/* Contact link below the accordion. */}
           <p className="mt-9 text-center font-copy text-sm text-muted sm:text-base">
             {site.faq.closingText}{" "}
             <Link
