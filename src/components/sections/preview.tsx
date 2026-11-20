@@ -5,7 +5,12 @@ import { useEffect, useId, useRef, useState } from "react";
 
 import type { FocusEvent, KeyboardEvent, ReactNode } from "react";
 import { HeroVideo } from "@/components/ui/hero-video";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useReducedMotion,
+} from "motion/react";
 
 import {
   Bookmark,
@@ -291,6 +296,7 @@ type PreviewCalloutProps = {
   text: string;
   index: number;
   reducedMotion: boolean;
+  isInView: boolean;
   className: string;
 };
 
@@ -298,15 +304,20 @@ type PreviewCalloutProps = {
  * Floating callouts are the only continuously moving elements
  * in the product preview.
  */
+
 function PreviewCallout({
   screenId,
   text,
   index,
   reducedMotion,
+  isInView,
   className,
 }: PreviewCalloutProps) {
   const icons = calloutIcons[screenId];
   const Icon = icons[index % icons.length];
+
+  // Keep the floating loop active only while the stage is visible.
+  const shouldAnimate = !reducedMotion && isInView;
 
   return (
     <motion.span
@@ -316,11 +327,11 @@ function PreviewCallout({
         "font-copy text-xs font-medium text-ink shadow-card",
         className,
       ].join(" ")}
-      animate={reducedMotion ? { y: 0 } : { y: [0, -6, 0] }}
+      animate={shouldAnimate ? { y: [0, -6, 0] } : { y: 0 }}
       transition={{
         duration: 4,
         delay: index * 0.5,
-        repeat: reducedMotion ? 0 : Infinity,
+        repeat: shouldAnimate ? Infinity : 0,
         ease: "easeInOut",
       }}
     >
@@ -344,6 +355,13 @@ export function Preview() {
   const [isFocused, setIsFocused] = useState(false);
 
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  // Track the desktop preview stage to control its floating callouts.
+  const calloutsContainerRef = useRef<HTMLDivElement>(null);
+
+  const calloutsInView = useInView(calloutsContainerRef, {
+    amount: 0.1,
+  });
 
   const id = useId();
   const panelId = `${id}-preview-panel`;
@@ -516,7 +534,10 @@ export function Preview() {
             className="relative mt-6 outline-none focus-visible:ring-2 focus-visible:ring-violet focus-visible:ring-offset-4"
           >
             {/* Desktop: large browser frame with overlapping phone. */}
-            <div className="relative isolate mx-auto hidden max-w-[1000px] pb-12 pt-2 lg:block">
+            <div
+              ref={calloutsContainerRef}
+              className="relative isolate mx-auto hidden max-w-[1000px] pb-12 pt-2 lg:block"
+            >
               {/* Soft coral-to-violet glow behind the frames. */}
               <div
                 aria-hidden="true"
@@ -572,6 +593,7 @@ export function Preview() {
                   text={callout}
                   index={index}
                   reducedMotion={reducedMotion}
+                  isInView={calloutsInView}
                   className={
                     index === 0
                       ? "absolute left-0 top-[18%] z-30"
