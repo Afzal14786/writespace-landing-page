@@ -7,7 +7,7 @@ import { Preview } from "@/components/sections/preview";
 import { Developers } from "@/components/sections/developers";
 import { Audience } from "@/components/sections/audience";
 import { FAQ } from "@/components/sections/faq";
-import { Waitlist } from "@/components/sections/waitlist";
+// import { Waitlist } from "@/components/sections/waitlist";
 import { Footer } from "@/components/sections/footer";
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
         <Developers />
         <Audience />
         <FAQ />
-        <Waitlist />
+        {/* <Waitlist /> */}
       </main>
 
       <Footer />
