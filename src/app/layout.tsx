@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Fraunces, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/content/site";
+import { assets } from "@/lib/assets";
 import "./globals.css";
 
 /*
@@ -37,18 +38,50 @@ const siteTitle = `${site.hero.headline.firstLine} ${site.hero.headline.secondLi
 const siteDescription = site.hero.description;
 
 export const metadata: Metadata = {
-  title: siteTitle,
+  title: `${siteTitle} | Writespace`,
   description: siteDescription,
+
+  icons: {
+    icon: [
+      {
+        url: assets.brand.favicon.src,
+        type: "image/svg+xml",
+      },
+      {
+        url: assets.brand.favicon32.src,
+        type: "image/png",
+        sizes: "32x32",
+      },
+    ],
+    apple: [
+      {
+        url: assets.brand.appleTouchIcon.src,
+        type: "image/png",
+        sizes: "180x180",
+      },
+    ],
+  },
+
   openGraph: {
     title: siteTitle,
     description: siteDescription,
     type: "website",
     siteName: "Writespace",
+    images: [
+      {
+        url: assets.social.openGraph.src,
+        width: assets.social.openGraph.width,
+        height: assets.social.openGraph.height,
+        alt: assets.social.openGraph.alt,
+      },
+    ],
   },
+
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
+    images: [assets.social.openGraph.src],
   },
 };
 
