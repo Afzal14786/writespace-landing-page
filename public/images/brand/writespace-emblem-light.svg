@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+
+      <circle cx="256" cy="256" r="220" fill="none" stroke="#20202B" stroke-width="12"/>
+      <circle cx="256" cy="256" r="199" fill="none" stroke="#20202B" stroke-width="4"/>
+    
+      <!-- barrel -->
+      <path d="M354 117
+               C366 105 385 105 397 117
+               L415 135
+               C427 147 427 166 415 178
+               L330 263
+               L269 202 Z"
+            fill="#20202B"/>
+      <!-- barrel highlight -->
+      <path d="M374 111 L424 161" fill="none" stroke="#FAF8F4"
+            stroke-width="5" stroke-linecap="round" opacity=".9"/>
+      <!-- grip / collar -->
+      <path d="M300 232 L351 283" fill="none" stroke="#20202B" stroke-width="20"
+            stroke-linecap="round"/>
+      <path d="M290 242 L340 292" fill="none" stroke="#20202B" stroke-width="7"
+            stroke-linecap="round"/>
+      <!-- nib silhouette -->
+      <path d="M269 202
+               L330 263
+               C319 293 302 331 277 372
+               C258 403 232 432 207 449
+               C212 416 218 379 232 344
+               C248 304 261 240 269 202 Z"
+            fill="#20202B"/>
+      <!-- nib split and breather hole -->
+      <path d="M269 218 C261 286 244 361 207 449" fill="none"
+            stroke="#FAF8F4" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="278" cy="315" r="10" fill="#FAF8F4"/>
+    
+      <path d="M205 449
+               C170 468 139 463 127 444
+               C116 427 128 409 148 411
+               C162 413 167 427 157 435
+               C148 442 136 435 141 427
+               M205 449
+               C247 457 293 442 330 416
+               C350 402 369 394 389 398"
+            fill="none" stroke="#8274D8" stroke-width="10"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    
+</svg>
