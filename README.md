@@ -15,6 +15,9 @@ The platform supports two primary content types:
 
 Both content types are built around a shared content identity, allowing common platform features such as reactions, comments, saves, and shares to work consistently.
 
+**[Visit The Documentation Page →](https://writespace.gitbook.io/writespace-docs)**  
+**[Visit The Landing Page →](https://writespace-app.netlify.app/)**
+
 ### Platform Features
 
 - Create and manage Posts and long-form Articles.
