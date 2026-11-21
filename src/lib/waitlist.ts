@@ -1,58 +1,82 @@
-type WaitlistIntegrationEnvironment = {
-  writespaceApiUrl: string | undefined;
-  writespaceApiKey: string | undefined;
-  emailServiceApiKey: string | undefined;
-  databaseUrl: string | undefined;
-};
+const REQUEST_TIMEOUT_MS = 10_000;
 
 /**
- * Keep optional integration credentials in environment variables.
- * Never hard-code API keys or expose them to client components.
+ * Raised when the backend URL is missing or incorrectly configured.
+ * This is kept separate from request failures so the route can return
+ * an appropriate service-unavailable response.
  */
-function readIntegrationEnvironment(): WaitlistIntegrationEnvironment {
-  return {
-    writespaceApiUrl: process.env.WRITESPACE_API_URL,
-    writespaceApiKey: process.env.WRITESPACE_API_KEY,
-    emailServiceApiKey: process.env.WAITLIST_EMAIL_SERVICE_API_KEY,
-    databaseUrl: process.env.WAITLIST_DATABASE_URL,
-  };
+export class WaitlistConfigurationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "WaitlistConfigurationError";
+  }
 }
 
 /**
- * Temporary waitlist adapter.
- *
- * This implementation only logs submissions on the server.
- * Replace it with persistent storage before accepting real signups.
+ * Resolve the public waitlist endpoint from a server-only environment
+ * variable. The configured value should end at /api/v1, not /waitlist.
  */
-export async function saveWaitlistEmail(
-  email: string,
-  topic?: string,
-): Promise<{ success: true }> {
-  const integrationEnvironment = readIntegrationEnvironment();
+function getWaitlistEndpoint(): string {
+  const configuredBaseUrl = process.env.WRITESPACE_API_BASE_URL?.trim();
 
-  // Log whether future integration settings are present, never their values.
-  const optionalEnvironmentValuesPresent = Object.values(
-    integrationEnvironment,
-  ).some(Boolean);
+  if (!configuredBaseUrl) {
+    throw new WaitlistConfigurationError(
+      "WRITESPACE_API_BASE_URL is not configured.",
+    );
+  }
 
-  // TODO: Connect your own Writespace API using the server-side
-  // WRITESPACE_API_URL and WRITESPACE_API_KEY environment variables.
+  let baseUrl: URL;
 
-  // TODO: Connect an email service using
-  // WAITLIST_EMAIL_SERVICE_API_KEY when a provider is selected.
+  try {
+    baseUrl = new URL(configuredBaseUrl);
+  } catch {
+    throw new WaitlistConfigurationError(
+      "WRITESPACE_API_BASE_URL is not a valid URL.",
+    );
+  }
 
-  // TODO: Persist signups and optional topics in a database using
-  // WAITLIST_DATABASE_URL. Add duplicate-email handling and a
-  // retention policy before enabling public waitlist submissions.
+  if (
+    !["http:", "https:"].includes(baseUrl.protocol) ||
+    baseUrl.username ||
+    baseUrl.password ||
+    baseUrl.search ||
+    baseUrl.hash
+  ) {
+    throw new WaitlistConfigurationError(
+      "WRITESPACE_API_BASE_URL must be a valid HTTP(S) base URL.",
+    );
+  }
 
-  console.info("[waitlist] Submission received", {
-    email,
-    topic: topic || undefined,
-    optionalEnvironmentValuesPresent,
-    adapter: "temporary-log-only",
+  // Normalize a trailing slash before adding the confirmed route path.
+  baseUrl.pathname = `${baseUrl.pathname.replace(/\/+$/, "")}/waitlist`;
+
+  return baseUrl.toString();
+}
+
+/**
+ * Sends a validated email to the Writespace backend.
+ *
+ * The backend owns persistence and duplicate handling. Both HTTP 200
+ * (already registered) and HTTP 201 (new subscriber) are successful.
+ */
+export async function saveWaitlistEmail(email: string): Promise<void> {
+  const endpoint = getWaitlistEndpoint();
+
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+    cache: "no-store",
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
   });
 
-  return {
-    success: true,
-  };
+  if (!response.ok) {
+    // Do not forward backend error details or subscriber information
+    // to the browser. The route handler returns a generic failure.
+    throw new Error(
+      `Writespace waitlist API responded with status ${response.status}.`,
+    );
+  }
 }
