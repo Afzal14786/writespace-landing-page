@@ -5,13 +5,16 @@ import { z } from "zod";
  *
  * The website field is a honeypot. It is intentionally permitted
  * by the schema because the server handles filled honeypots silently
- * instead of exposing the anti-spam check to bots.
+ * instead of forwarding them to the backend.
  */
 export const waitlistSubmissionSchema = z.object({
-  email: z.string().trim().min(1).max(254).email(),
-
-  // The optional follow-up answer is limited to 200 characters.
-  topic: z.string().trim().max(200).optional(),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .max(254, "Email address is too long")
+    .email("Please provide a valid email address")
+    .transform((email) => email.toLowerCase()),
 
   website: z.string().optional().default(""),
 });
