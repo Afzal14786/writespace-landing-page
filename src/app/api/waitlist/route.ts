@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 
-import { saveWaitlistEmail } from "@/lib/waitlist";
+import { saveWaitlistEmail, WaitlistConfigurationError } from "@/lib/waitlist";
 import { waitlistSubmissionSchema } from "@/lib/waitlist-schema";
 
-/** Safely narrow untrusted JSON to an object before reading its fields. */
+/** Safely narrow untrusted JSON before reading its fields. */
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -19,9 +19,9 @@ export async function POST(request: Request) {
   }
 
   /*
-   * Check the honeypot before validating the email.
-   * Bots receive the same response as a successful signup, but their
-   * submitted email and topic never reach the waitlist adapter.
+   * Check the honeypot before validating or forwarding the email.
+   * Bots receive a neutral response, and their data never reaches
+   * the Writespace backend.
    */
   if (
     isRecord(body) &&
@@ -38,12 +38,16 @@ export async function POST(request: Request) {
   }
 
   try {
-    await saveWaitlistEmail(result.data.email, result.data.topic);
+    await saveWaitlistEmail(result.data.email);
 
+    // The backend's 200 and 201 responses are both successful here.
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error("[waitlist] Failed to process signup", error);
+    // Log the server-side failure without logging the submitted email.
+    console.error("[waitlist] Failed to submit signup", error);
 
-    return NextResponse.json({ success: false }, { status: 500 });
+    const status = error instanceof WaitlistConfigurationError ? 503 : 502;
+
+    return NextResponse.json({ success: false }, { status });
   }
 }
